@@ -30,13 +30,6 @@ void putchar(char ch) {
   sbi_call(ch, 0, 0, 0, 0, 0, 0, 1 /* console putchar */);
 }
 
-void *memset(void *buf, char c, size_t n) {
-  uint8_t *p = (uint8_t *) buf;
-  while (n--)
-    *p++ = c;
-  return buf;
-}
-
 void kernel_main(void) {
   printf("\n\nhello %s\n", "world!");
   printf("1 + 2 = %d, %x\n", 1 + 2, 0x1234abcd);
