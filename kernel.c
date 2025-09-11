@@ -156,4 +156,10 @@ void kernel_main(void) {
   }
 }
 
-
+__attribute__((naked)) void switch_context(uint32_t *prev_sp, uint32_t *next_sp) {
+  __asm__ __volatile__(
+    // save callee-saved registers onto the current process's stack
+    "addi sp, sp, -13 * 4\n"  // allocate stack space for 13 4-byte registers
+    "sw ra, 0 * 4(sp)\n"      // save callee-saved registers only
+    "sw s0, 1 * 4(sp)\n"
+}
