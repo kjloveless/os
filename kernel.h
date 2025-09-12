@@ -6,6 +6,7 @@
 
 #define PROC_UNUSED   0 // unused process control structure
 #define PROC_RUNNABLE 1 // runnable process
+#define PROC_EXITED   2
 
 #define SATP_SV32 (1u << 31)
 #define PAGE_V    (1 << 0)  // "valid" bit (entry is enabled)
