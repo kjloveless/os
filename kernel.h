@@ -15,6 +15,7 @@
 #define PAGE_U    (1 << 4)  // user (accessible in user mode)
 
 #define SSTATUS_SPIE (1 << 5)
+#define SCAUSE_ECALL 8
 
 // the base virtual address of an application image. this needs to match
 // the starting address defined in 'user.ld'
