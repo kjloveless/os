@@ -12,7 +12,7 @@ struct process {
   int state;            // process state: PROC_UNUSED or PROC_RUNNABLE
   vaddr_t sp;           // stack pointer
   uint8_t stack[8192];  // kernel stack
-}
+}:
 
 struct sbiret {
   long error;
