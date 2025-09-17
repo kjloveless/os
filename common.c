@@ -2,6 +2,52 @@
 
 void putchar(char ch);
 
+void print_u64_dec(uint64_t value) {
+  char buf[20]; // max for 2^64-1 is 20 digits
+  int n = 0;
+  if (value == 0) {
+    putchar('0');
+    return;
+  }
+
+  while (value) {
+    buf[n++] = (char)('0' + (value % 10));
+    value /= 10;
+  }
+  while (n--)
+    putchar(buf[n]);
+  return;
+}
+
+void print_i64_dec(long long value) {
+  if (value < 0) {
+    putchar('-');
+    uint64_t mag = ((uint64_t)(~(uint64_t)value)) + 1u;
+    print_u64_dec((uint64_t)value);
+    return;
+  } else {
+    print_u64_dec((uint64_t)value);
+  }
+}
+
+void print_u64_hex(uint64_t value, int uppercase) {
+  const char *digits = uppercase ? "0123456789ABCDEF" : "0123456789abcdef";
+  char buf[16]; // max for 64-bit hex is 16 digits
+  int n = 0;
+  if (value == 0) {
+    putchar('0');
+    return;
+  }
+
+  while (value) {
+    buf[n++] = digits[value & 0xF];
+    value >>= 4;
+  }
+  while (n--)
+    putchar(buf[n]);
+  return;
+}
+
 void printf(const char *fmt, ...) {
   va_list vargs;
   va_start(vargs, fmt);
@@ -22,6 +68,11 @@ void printf(const char *fmt, ...) {
             putchar(*s);
             s++;
           }
+          break;
+        }
+        case 'u': {
+          uint64_t value = va_arg(vargs, uint64_t);
+          print_u64_dec(value);
           break;
         }
         case 'd': { // print an integer in decimal
